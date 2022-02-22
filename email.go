@@ -76,8 +76,7 @@ func mailAddressesToStr(addrs []mail.Address) string {
 }
 
 func emailBodyToStr(body Body, boundary string) string {
-	var out string
-	out += bodyPartToStr(body.PlainText, boundary, TextPlain, QuotedPrintable)
+	out := bodyPartToStr(body.PlainText, boundary, TextPlain, QuotedPrintable)
 	out += bodyPartToStr(body.HTML, boundary, TextHTML, QuotedPrintable)
 	out += closeBodyParts(boundary)
 	return out
