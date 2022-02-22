@@ -12,25 +12,8 @@ func Send(client *smtp.Client, e Email) error {
 		return err
 	}
 
-	// set "To" recipients
-	for _, r := range e.To {
-		err = client.Rcpt(r.Address)
-		if err != nil {
-			return err
-		}
-	}
-
-	// set "Cc" recipients
-	for _, r := range e.CC {
-		err = client.Rcpt(r.Address)
-		if err != nil {
-			return err
-		}
-	}
-
-	// set "Bcc" recipients
-	for _, r := range e.BCC {
-		err = client.Rcpt(r.Address)
+	for _, r := range getAllRecipients(e) {
+		err = client.Rcpt(r)
 		if err != nil {
 			return err
 		}
@@ -55,4 +38,33 @@ func Send(client *smtp.Client, e Email) error {
 	}
 
 	return nil
+}
+
+func getAllRecipients(e Email) []string {
+	var out []string
+	// "To" recipients
+	for _, r := range e.To {
+		if r.Address == "" {
+			continue
+		}
+		out = append(out, r.Address)
+	}
+
+	// "Cc" recipients
+	for _, r := range e.CC {
+		if r.Address == "" {
+			continue
+		}
+		out = append(out, r.Address)
+	}
+
+	// set "Bcc" recipients
+	for _, r := range e.BCC {
+		if r.Address == "" {
+			continue
+		}
+		out = append(out, r.Address)
+	}
+
+	return out
 }

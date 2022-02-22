@@ -9,7 +9,6 @@ import (
 // When successfull, make sure to call Quit on the smtp client struct after you're done sending emails to close the connection to the SMTP server
 func NewClient(host, username, password string) (*smtp.Client, error) {
 	auth := smtp.PlainAuth("", username, password, host)
-
 	// TLS config
 	tlsConfig := &tls.Config{
 		InsecureSkipVerify: true,

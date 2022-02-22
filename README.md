@@ -61,6 +61,18 @@ func main() {
 
 ---
 
+## Providers
+
+Works with:
+
+- Mailjet (SMTP relay)
+
+Doesn't seem to work with:
+
+- Gmail (smtp.google.com:465 and smtp.google.com:587)
+
+---
+
 ## Roadmap
 
 - Support file attachments
