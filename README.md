@@ -6,7 +6,6 @@ Basic example
 import "github.com/ejuju/email"
 
 func main() {
-
     // init smtp client
 	smtpClient, err := NewClient(
 		os.Getenv("SMTP_HOST"),
